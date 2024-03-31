@@ -1,0 +1,24 @@
+import { AbstractModel } from '../AbstractModel';
+import { TranslateFieldModelInterface } from './interfaces/TranslateFieldModelInterface';
+
+export class TranslateFieldModelAbstract extends AbstractModel implements TranslateFieldModelInterface {
+  id!: number;
+  siteId!: number;
+  langId!: number;
+  table!: string;
+  tableId!: number;
+  field!: string;
+  value!: string;
+  deleted!: string;
+  createdAt!: string;
+  createdBy!: number;
+  createdAs!: number;
+  updatedAt!: string;
+  updatedBy!: number;
+  updatedAs!: number;
+  deletedAt!: string;
+  deletedAs!: number;
+  deletedBy!: number;
+  restoredAt!: string;
+  restoredBy!: number;
+}
