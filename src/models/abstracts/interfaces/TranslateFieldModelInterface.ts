@@ -6,7 +6,7 @@ export interface TranslateFieldModelInterface {
   tableId: number;
   field: string;
   value: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

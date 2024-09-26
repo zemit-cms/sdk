@@ -11,7 +11,7 @@ export class AuditModelAbstract extends AbstractModel implements AuditModelInter
   columns!: string;
   before!: string;
   after!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

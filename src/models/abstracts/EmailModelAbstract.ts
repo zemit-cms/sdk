@@ -14,11 +14,11 @@ export class EmailModelAbstract extends AbstractModel implements EmailModelInter
   content!: string;
   meta!: string;
   viewPath!: string;
-  sent!: string;
+  sent!: number;
   sentAt!: string;
   sentBy!: number;
   sentAs!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

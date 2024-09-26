@@ -8,12 +8,12 @@ export class JobModelAbstract extends AbstractModel implements JobModelInterface
   task!: string;
   action!: string;
   params!: object;
-  thread!: string;
+  thread!: number;
   priority!: number;
   at!: string;
   status!: string;
   result!: object;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

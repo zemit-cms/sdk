@@ -6,7 +6,7 @@ export class UserGroupModelAbstract extends AbstractModel implements UserGroupMo
   userId!: number;
   groupId!: number;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

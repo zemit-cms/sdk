@@ -5,7 +5,7 @@ export class EmailFileModelAbstract extends AbstractModel implements EmailFileMo
   id!: number;
   emailId!: number;
   fileId!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

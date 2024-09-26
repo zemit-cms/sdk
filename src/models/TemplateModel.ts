@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { Type } from 'class-transformer';
 import { TemplateModelAbstract } from './abstracts/TemplateModelAbstract';
 import { UserModel } from './UserModel';
+import { EmailModel } from './EmailModel';
 
 export class TemplateModel extends TemplateModelAbstract {
 
@@ -28,4 +29,31 @@ export class TemplateModel extends TemplateModelAbstract {
 
   @Type(() => UserModel)
   RestoredAs!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredAsEntity!: UserModel;
+
+  @Type(() => EmailModel)
+  EmailList!: EmailModel[];
 }

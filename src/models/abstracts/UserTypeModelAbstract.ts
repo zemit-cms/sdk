@@ -6,7 +6,7 @@ export class UserTypeModelAbstract extends AbstractModel implements UserTypeMode
   userId!: number;
   typeId!: number;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

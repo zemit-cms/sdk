@@ -2,9 +2,11 @@ import 'reflect-metadata';
 import { Type } from 'class-transformer';
 import { RoleModelAbstract } from './abstracts/RoleModelAbstract';
 import { UserModel } from './UserModel';
-import { UserRoleModel } from './UserRoleModel';
 import { GroupRoleModel } from './GroupRoleModel';
+import { RoleFeatureModel } from './RoleFeatureModel';
+import { UserRoleModel } from './UserRoleModel';
 import { GroupModel } from './GroupModel';
+import { FeatureModel } from './FeatureModel';
 
 export class RoleModel extends RoleModelAbstract {
 
@@ -32,15 +34,45 @@ export class RoleModel extends RoleModelAbstract {
   @Type(() => UserModel)
   RestoredAs!: UserModel;
 
-  @Type(() => UserRoleModel)
-  UserNode!: UserRoleModel[];
-
-  @Type(() => GroupRoleModel)
-  GroupNode!: GroupRoleModel[];
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
 
   @Type(() => UserModel)
-  UserList!: UserModel[];
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredAsEntity!: UserModel;
+
+  @Type(() => GroupRoleModel)
+  GroupRoleList!: GroupRoleModel[];
+
+  @Type(() => RoleFeatureModel)
+  RoleFeatureList!: RoleFeatureModel[];
+
+  @Type(() => UserRoleModel)
+  UserRoleList!: UserRoleModel[];
 
   @Type(() => GroupModel)
   GroupList!: GroupModel[];
+
+  @Type(() => FeatureModel)
+  FeatureList!: FeatureModel[];
+
+  @Type(() => UserModel)
+  UserList!: UserModel[];
 }

@@ -6,7 +6,7 @@ export class TranslateTableModelAbstract extends AbstractModel implements Transl
   table!: string;
   leftId!: number;
   rightId!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

@@ -3,7 +3,7 @@ export interface UserGroupModelInterface {
   userId: number;
   groupId: number;
   position: number;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

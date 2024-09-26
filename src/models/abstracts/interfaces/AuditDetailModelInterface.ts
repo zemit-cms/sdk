@@ -9,7 +9,7 @@ export interface AuditDetailModelInterface {
   map: string;
   before: string;
   after: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

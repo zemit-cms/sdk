@@ -1,11 +1,11 @@
 export interface TemplateModelInterface {
   id: number;
   index: string;
-  label: string;
-  subject: string;
+  name: string;
+  title: string;
   content: string;
   meta: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

@@ -3,7 +3,7 @@ export interface TranslateTableModelInterface {
   table: string;
   leftId: number;
   rightId: number;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

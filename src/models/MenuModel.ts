@@ -25,4 +25,28 @@ export class MenuModel extends MenuModelAbstract {
 
   @Type(() => UserModel)
   RestoredBy!: UserModel;
+
+  @Type(() => MenuModel)
+  ParentEntity!: MenuModel;
+
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
 }

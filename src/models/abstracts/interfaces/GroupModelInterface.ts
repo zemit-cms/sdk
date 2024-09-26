@@ -3,7 +3,7 @@ export interface GroupModelInterface {
   index: string;
   label: string;
   position: number;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

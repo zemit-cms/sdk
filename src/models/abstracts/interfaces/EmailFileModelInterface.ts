@@ -2,7 +2,7 @@ export interface EmailFileModelInterface {
   id: number;
   emailId: number;
   fileId: number;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

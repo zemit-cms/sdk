@@ -8,7 +8,7 @@ export interface AuditModelInterface {
   columns: string;
   before: string;
   after: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

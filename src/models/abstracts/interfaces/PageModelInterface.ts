@@ -4,7 +4,7 @@ export interface PageModelInterface {
   siteId: number;
   name: string;
   description: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

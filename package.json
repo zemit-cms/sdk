@@ -16,6 +16,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build && npm run build:types",
     "build:types": "vue-tsc --project tsconfig.types.json",
+    "build:publish:local": "yarn build && yarn publish:local",
     "publish:local": "yalc publish && yalc push",
     "preview": "vite preview"
   },

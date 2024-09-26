@@ -9,7 +9,7 @@ export class PostModelAbstract extends AbstractModel implements PostModelInterfa
   name!: string;
   description!: string;
   content!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

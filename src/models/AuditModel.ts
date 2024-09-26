@@ -30,11 +30,32 @@ export class AuditModel extends AuditModelAbstract {
   @Type(() => UserModel)
   RestoredAs!: UserModel;
 
+  @Type(() => AuditModel)
+  ParentEntity!: AuditModel;
+
   @Type(() => UserModel)
   CreatedByEntity!: UserModel;
 
   @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
   UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredAsEntity!: UserModel;
 
   @Type(() => AuditDetailModel)
   AuditDetailList!: AuditDetailModel[];

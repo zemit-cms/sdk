@@ -3,7 +3,7 @@ export interface UserTypeModelInterface {
   userId: number;
   typeId: number;
   position: number;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

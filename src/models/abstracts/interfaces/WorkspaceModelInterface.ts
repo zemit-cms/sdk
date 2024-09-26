@@ -1,12 +1,12 @@
 export interface WorkspaceModelInterface {
   id: number;
-  uuid: null;
+  uuid: string;
   name: string;
   description: string;
   icon: string;
   color: string;
   status: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

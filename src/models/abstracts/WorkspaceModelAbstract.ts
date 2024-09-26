@@ -3,13 +3,13 @@ import { WorkspaceModelInterface } from './interfaces/WorkspaceModelInterface';
 
 export class WorkspaceModelAbstract extends AbstractModel implements WorkspaceModelInterface {
   id!: number;
-  uuid!: null;
+  uuid!: string;
   name!: string;
   description!: string;
   icon!: string;
   color!: string;
   status!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

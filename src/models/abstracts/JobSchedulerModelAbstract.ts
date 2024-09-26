@@ -10,7 +10,7 @@ export class JobSchedulerModelAbstract extends AbstractModel implements JobSched
   params!: object;
   frequency!: string;
   startingAt!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

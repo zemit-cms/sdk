@@ -5,7 +5,7 @@ export class LangModelAbstract extends AbstractModel implements LangModelInterfa
   id!: number;
   label!: string;
   code!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

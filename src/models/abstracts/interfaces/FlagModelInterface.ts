@@ -5,9 +5,9 @@ export interface FlagModelInterface {
   langId: number;
   label: string;
   index: string;
-  value: string;
+  value: number;
   meta: object;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

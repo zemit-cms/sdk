@@ -6,7 +6,7 @@ export class RoleModelAbstract extends AbstractModel implements RoleModelInterfa
   index!: string;
   label!: string;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

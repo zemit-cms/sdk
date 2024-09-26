@@ -7,7 +7,7 @@ export interface JobSchedulerModelInterface {
   params: object;
   frequency: string;
   startingAt: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

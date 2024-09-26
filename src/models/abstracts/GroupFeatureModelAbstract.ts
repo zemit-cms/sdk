@@ -6,7 +6,7 @@ export class GroupFeatureModelAbstract extends AbstractModel implements GroupFea
   groupId!: number;
   featureId!: number;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

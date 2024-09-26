@@ -6,7 +6,7 @@ export class GroupTypeModelAbstract extends AbstractModel implements GroupTypeMo
   groupId!: number;
   typeId!: number;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

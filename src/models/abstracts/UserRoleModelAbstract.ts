@@ -6,7 +6,7 @@ export class UserRoleModelAbstract extends AbstractModel implements UserRoleMode
   userId!: number;
   roleId!: number;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

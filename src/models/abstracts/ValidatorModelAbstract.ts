@@ -8,7 +8,7 @@ export class ValidatorModelAbstract extends AbstractModel implements ValidatorMo
   index!: string;
   type!: string;
   params!: object;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

@@ -10,7 +10,7 @@ export class SessionModelAbstract extends AbstractModel implements SessionModelI
   jwt!: string;
   meta!: string;
   date!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

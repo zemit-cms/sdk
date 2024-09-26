@@ -33,5 +33,32 @@ export class SessionModel extends SessionModelAbstract {
   RestoredAs!: UserModel;
 
   @Type(() => UserModel)
-  UserAsEntity!: UserModel;
+  UserEntity!: UserModel;
+
+  @Type(() => UserModel)
+  AsUserEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredAsEntity!: UserModel;
 }

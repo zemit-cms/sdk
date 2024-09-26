@@ -9,7 +9,7 @@ export class TranslateFieldModelAbstract extends AbstractModel implements Transl
   tableId!: number;
   field!: string;
   value!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

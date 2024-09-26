@@ -7,7 +7,7 @@ export interface MetaModelInterface {
   categoryId: number;
   key: string;
   value: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

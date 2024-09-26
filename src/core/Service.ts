@@ -27,10 +27,14 @@ export class Service extends ServiceConfig
   http!: AxiosInstance
   
   endpoints: { [key: string]: string } = {
-    get: '/get',
-    getAll: '/get-all',
+    // get: '/get',
+    // getWith: '/get-with',
+    // getAll: '/get-all',
+    // getAllWith: '/get-all-with',
     find: '/find',
+    findWith: '/find-with',
     findFirst: '/find-first',
+    findFirstWith: '/find-first-with',
     import: '/import',
     export: '/export',
     count: '/count',
@@ -92,10 +96,14 @@ export class Service extends ServiceConfig
    * Endpoint URL getters
    * @return string
    */
-  getGetAllUrl = () => this.getUrl('getAll')
-  getGetUrl = () => this.getUrl('get')
+  // getGetAllUrl = () => this.getUrl('getAll')
+  // getGetAllWithUrl = () => this.getUrl('getAllWith')
+  // getGetUrl = () => this.getUrl('get')
+  // getGetWithUrl = () => this.getUrl('getWith')
   getFindUrl = () => this.getUrl('find')
+  getFindWithUrl = () => this.getUrl('findWith')
   getFindFirstUrl = () => this.getUrl('findFirst')
+  getFindFirstWithUrl = () => this.getUrl('findFirstWith')
   getImportUrl = () => this.getUrl('import')
   getExportUrl = () => this.getUrl('export')
   getCountUrl = () => this.getUrl('count')
@@ -110,10 +118,14 @@ export class Service extends ServiceConfig
   getLoginUrl = () => this.getUrl('login')
   getUploadUrl = () => this.getUrl('upload')
   
-  getAll = (data = {}, config = {}) => this.handleRequest(this.getGetAllUrl(), data, config)
-  get = (data = {}, config = {}) => this.handleRequest(this.getGetUrl(), data, config)
+  // getAll = (data = {}, config = {}) => this.handleRequest(this.getGetAllUrl(), data, config)
+  // getAllWith = (data = {}, config = {}) => this.handleRequest(this.getGetAllWithUrl(), data, config)
+  // get = (data = {}, config = {}) => this.handleRequest(this.getGetUrl(), data, config)
+  // getWith = (data = {}, config = {}) => this.handleRequest(this.getGetWithUrl(), data, config)
   find = (data = {}, config = {}) => this.handleRequest(this.getFindUrl(), data, config)
-  findFirst = (data = {}, config = {}) => this.handleRequest(this.getFindFirstUrl(), data, config)
+  findWith = (data = {}, config = {}) => this.handleRequest(this.getFindWithUrl(), data, config)
+  findFirst = (data = {}, config = {}) => this.handleRequest(this.getFindFirstWithUrl(), data, config)
+  findFirstWith = (data = {}, config = {}) => this.handleRequest(this.getFindFirstWithUrl(), data, config)
   import = (data = {}, config = {}) => this.handleRequest(this.getImportUrl(), data, config)
   export = (data = {}, config = {}) => this.handleRequest(this.getExportUrl(), data, config)
   count = (data = {}, config = {}) => this.handleRequest(this.getCountUrl(), data, config)

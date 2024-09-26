@@ -10,7 +10,7 @@ export class MetaModelAbstract extends AbstractModel implements MetaModelInterfa
   categoryId!: number;
   key!: string;
   value!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

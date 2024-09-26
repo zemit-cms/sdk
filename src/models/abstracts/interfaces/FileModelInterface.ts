@@ -11,7 +11,7 @@ export interface FileModelInterface {
   nameTemp: string;
   size: string;
   error: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

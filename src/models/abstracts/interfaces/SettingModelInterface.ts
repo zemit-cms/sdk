@@ -4,7 +4,7 @@ export interface SettingModelInterface {
   index: string;
   label: string;
   value: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

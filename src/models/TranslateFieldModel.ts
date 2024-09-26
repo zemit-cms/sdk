@@ -2,6 +2,9 @@ import 'reflect-metadata';
 import { Type } from 'class-transformer';
 import { TranslateFieldModelAbstract } from './abstracts/TranslateFieldModelAbstract';
 import { UserModel } from './UserModel';
+import { SiteModel } from './SiteModel';
+import { LangModel } from './LangModel';
+import { TableModel } from './TableModel';
 
 export class TranslateFieldModel extends TranslateFieldModelAbstract {
 
@@ -25,4 +28,34 @@ export class TranslateFieldModel extends TranslateFieldModelAbstract {
 
   @Type(() => UserModel)
   RestoredBy!: UserModel;
+
+  @Type(() => SiteModel)
+  SiteEntity!: SiteModel;
+
+  @Type(() => LangModel)
+  LangEntity!: LangModel;
+
+  @Type(() => TableModel)
+  TableEntity!: TableModel;
+
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
 }

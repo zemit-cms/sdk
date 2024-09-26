@@ -14,7 +14,7 @@ export class FileModelAbstract extends AbstractModel implements FileModelInterfa
   nameTemp!: string;
   size!: string;
   error!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

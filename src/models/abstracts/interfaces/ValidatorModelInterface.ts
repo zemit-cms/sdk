@@ -5,7 +5,7 @@ export interface ValidatorModelInterface {
   index: string;
   type: string;
   params: object;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

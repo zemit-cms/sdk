@@ -2,9 +2,11 @@ import 'reflect-metadata';
 import { Type } from 'class-transformer';
 import { GroupModelAbstract } from './abstracts/GroupModelAbstract';
 import { UserModel } from './UserModel';
-import { UserGroupModel } from './UserGroupModel';
+import { GroupFeatureModel } from './GroupFeatureModel';
 import { GroupRoleModel } from './GroupRoleModel';
 import { GroupTypeModel } from './GroupTypeModel';
+import { UserGroupModel } from './UserGroupModel';
+import { FeatureModel } from './FeatureModel';
 import { RoleModel } from './RoleModel';
 import { TypeModel } from './TypeModel';
 
@@ -34,21 +36,51 @@ export class GroupModel extends GroupModelAbstract {
   @Type(() => UserModel)
   RestoredAs!: UserModel;
 
-  @Type(() => UserGroupModel)
-  UserNode!: UserGroupModel[];
-
-  @Type(() => GroupRoleModel)
-  RoleNode!: GroupRoleModel[];
-
-  @Type(() => GroupTypeModel)
-  TypeNode!: GroupTypeModel[];
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
 
   @Type(() => UserModel)
-  UserList!: UserModel[];
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredAsEntity!: UserModel;
+
+  @Type(() => GroupFeatureModel)
+  GroupFeatureList!: GroupFeatureModel[];
+
+  @Type(() => GroupRoleModel)
+  GroupRoleList!: GroupRoleModel[];
+
+  @Type(() => GroupTypeModel)
+  GroupTypeList!: GroupTypeModel[];
+
+  @Type(() => UserGroupModel)
+  UserGroupList!: UserGroupModel[];
+
+  @Type(() => FeatureModel)
+  FeatureList!: FeatureModel[];
 
   @Type(() => RoleModel)
   RoleList!: RoleModel[];
 
   @Type(() => TypeModel)
   TypeList!: TypeModel[];
+
+  @Type(() => UserModel)
+  UserList!: UserModel[];
 }

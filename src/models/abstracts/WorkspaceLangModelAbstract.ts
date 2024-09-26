@@ -5,7 +5,7 @@ export class WorkspaceLangModelAbstract extends AbstractModel implements Workspa
   id!: number;
   workspaceId!: number;
   langId!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

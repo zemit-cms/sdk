@@ -1,10 +1,12 @@
 export interface DataModelInterface {
   id: number;
-  siteId: number;
+  workspaceId: number;
   tableId: number;
-  fieldId: number;
+  columnId: number;
+  recordId: number;
+  uuid: string;
   value: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

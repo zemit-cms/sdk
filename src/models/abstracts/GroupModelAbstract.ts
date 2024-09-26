@@ -6,7 +6,7 @@ export class GroupModelAbstract extends AbstractModel implements GroupModelInter
   index!: string;
   label!: string;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

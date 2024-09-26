@@ -5,7 +5,7 @@ export class PostCategoryModelAbstract extends AbstractModel implements PostCate
   id!: number;
   postId!: number;
   categoryId!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

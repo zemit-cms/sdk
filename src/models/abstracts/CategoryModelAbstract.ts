@@ -8,7 +8,7 @@ export class CategoryModelAbstract extends AbstractModel implements CategoryMode
   name!: string;
   index!: string;
   description!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

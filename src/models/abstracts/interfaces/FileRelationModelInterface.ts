@@ -2,7 +2,7 @@ export interface FileRelationModelInterface {
   id: number;
   fileId: number;
   category: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

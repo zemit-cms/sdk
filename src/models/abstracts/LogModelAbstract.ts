@@ -9,7 +9,7 @@ export class LogModelAbstract extends AbstractModel implements LogModelInterface
   message!: string;
   context!: string;
   date!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

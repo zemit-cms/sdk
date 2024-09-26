@@ -5,7 +5,7 @@ export class FileRelationModelAbstract extends AbstractModel implements FileRela
   id!: number;
   fileId!: number;
   category!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

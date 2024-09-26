@@ -6,7 +6,7 @@ export class MenuModelAbstract extends AbstractModel implements MenuModelInterfa
   name!: string;
   index!: string;
   parentId!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

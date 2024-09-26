@@ -10,7 +10,7 @@ export class TranslateModelAbstract extends AbstractModel implements TranslateMo
   categoryId!: number;
   key!: string;
   value!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

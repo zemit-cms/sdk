@@ -6,7 +6,7 @@ export class GroupRoleModelAbstract extends AbstractModel implements GroupRoleMo
   groupId!: number;
   roleId!: number;
   position!: number;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

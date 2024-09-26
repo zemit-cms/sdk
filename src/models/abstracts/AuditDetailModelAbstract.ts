@@ -12,7 +12,7 @@ export class AuditDetailModelAbstract extends AbstractModel implements AuditDeta
   map!: string;
   before!: string;
   after!: string;
-  deleted!: string;
+  deleted!: number;
   createdAt!: string;
   createdBy!: number;
   createdAs!: number;

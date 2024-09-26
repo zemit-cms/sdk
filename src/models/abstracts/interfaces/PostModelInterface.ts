@@ -6,7 +6,7 @@ export interface PostModelInterface {
   name: string;
   description: string;
   content: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

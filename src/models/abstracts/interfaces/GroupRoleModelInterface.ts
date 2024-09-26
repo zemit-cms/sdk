@@ -3,7 +3,7 @@ export interface GroupRoleModelInterface {
   groupId: number;
   roleId: number;
   position: number;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;

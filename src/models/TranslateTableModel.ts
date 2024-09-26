@@ -25,4 +25,31 @@ export class TranslateTableModel extends TranslateTableModelAbstract {
 
   @Type(() => UserModel)
   RestoredBy!: UserModel;
+
+  @Type(() => TranslateTableModel)
+  LeftEntity!: TranslateTableModel;
+
+  @Type(() => TranslateTableModel)
+  RightEntity!: TranslateTableModel;
+
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
 }

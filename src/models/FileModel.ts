@@ -3,6 +3,8 @@ import { Type } from 'class-transformer';
 import { FileModelAbstract } from './abstracts/FileModelAbstract';
 import { UserModel } from './UserModel';
 import { EmailFileModel } from './EmailFileModel';
+import { FileRelationModel } from './FileRelationModel';
+import { EmailModel } from './EmailModel';
 
 export class FileModel extends FileModelAbstract {
 
@@ -36,6 +38,36 @@ export class FileModel extends FileModelAbstract {
   @Type(() => UserModel)
   UserEntity!: UserModel;
 
+  @Type(() => UserModel)
+  CreatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  CreatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  UpdatedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedAsEntity!: UserModel;
+
+  @Type(() => UserModel)
+  DeletedByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredByEntity!: UserModel;
+
+  @Type(() => UserModel)
+  RestoredAsEntity!: UserModel;
+
   @Type(() => EmailFileModel)
-  EmailFileEntity!: EmailFileModel;
+  EmailFileList!: EmailFileModel[];
+
+  @Type(() => FileRelationModel)
+  FileRelationList!: FileRelationModel[];
+
+  @Type(() => EmailModel)
+  EmailList!: EmailModel[];
 }

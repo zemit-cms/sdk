@@ -5,7 +5,7 @@ export interface CategoryModelInterface {
   name: string;
   index: string;
   description: string;
-  deleted: string;
+  deleted: number;
   createdAt: string;
   createdBy: number;
   createdAs: number;
