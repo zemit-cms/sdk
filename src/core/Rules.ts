@@ -12,9 +12,10 @@ export class Rules {
         return typeof value === 'undefined' || value === null || value === '' || value === 0 || !value;
     }
 
-    static required(value: Array<any> | string | null = ''): boolean {
+    static required(value: Array<any> | string | number | null = ''): boolean {
         return ((Array.isArray(value) && value.length > 0) ||
             (typeof value === 'string' && !!value) ||
+            (typeof value === 'number' && !!value) ||
             (typeof value === 'object' && !Array.isArray(value) && value !== null) || false);
     }
 
