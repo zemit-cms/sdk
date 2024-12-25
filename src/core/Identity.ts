@@ -24,35 +24,35 @@ export class Identity {
     static refreshResponse: Promise<AxiosResponse<DataInterface<AuthRefreshViewInterface>>> | null = null;
 
     /**
-     * Sets the identity for the current session.
+     * Sets the identity for the current local storage.
      *
      * @param {AuthGetViewInterface|null} identity - The identity to be set.
      */
     static setIdentity(identity: AuthGetViewInterface) {
         this.identity = identity;
-        store.session.set('identity', this.identity);
+        store.set('identity', this.identity);
     }
 
     /**
-     * Gets the identity from the session store.
+     * Gets the identity from the local storage.
      *
-     * @return {AuthGetViewInterface|null} The identity stored in the session or undefined if not found.
+     * @return {AuthGetViewInterface|null} The identity stored in the local storage or undefined if not found.
      */
     static getIdentity(): AuthGetViewInterface | null {
         if (!this.identity) {
-            this.identity = store.session.get('identity', null);
+            this.identity = store.get('identity', null);
         }
         return this.identity;
     }
 
     /**
-     * Removes the identity from the session store.
+     * Removes the identity from the local storage.
      *
      * @return {void}
      */
     static removeIdentity(): void {
         this.identity = null;
-        store.session.remove('identity');
+        store.remove('identity');
     }
 
     /**
