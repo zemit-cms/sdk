@@ -4,6 +4,7 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosRequestConfig,
   AxiosResponse,
+  CreateAxiosDefaults,
 } from 'axios'
 
 import {Identity} from './Identity'
@@ -24,6 +25,7 @@ export abstract class ServiceConfig
 
 export class Service extends ServiceConfig
 {
+  static axios: AxiosInstance
   http!: AxiosInstance
   
   endpoints: { [key: string]: string } = {
@@ -79,6 +81,26 @@ export class Service extends ServiceConfig
   
   setModelUrl = (url: string) => (this.modelUrl = url)
   getModelUrl = () => this.modelUrl
+  
+  static getAxios(config?: CreateAxiosDefaults): AxiosInstance {
+    if (!Service.axios) {
+      Service.axios = axios.create(config)
+      Service.axios.interceptors.response.use(Service.responseInterceptor, Service.rejectedResponseInterceptor)
+      Service.axios.interceptors.request.use(Service.requestInterceptor)
+    }
+    return Service.axios;
+  }
+  
+  /**
+   * Create default Axios Request
+   * Add custom interceptors
+   */
+  getHttp(): AxiosInstance {
+    if (!this.http) {
+      this.http = Service.getAxios()
+    }
+    return this.http
+  }
   
   /**
    * Build an endpoint url using the baseUrl + modelUrl + endpointUrl
@@ -147,20 +169,12 @@ export class Service extends ServiceConfig
     complete?: CallableFunction,
   ): Promise<AxiosResponse<DataInterface<R>>>
   {
-    /**
-     * Create default Axios Request
-     * Add custom interceptors
-     */
-    this.http = axios.create(this.requestConfig)
-    this.http.interceptors.response.use(this.responseInterceptor, this.rejectedResponseInterceptor)
-    this.http.interceptors.request.use(this.requestInterceptor)
-    
     return this.prepareUploads(data).then((data) => {
       this.prepareRequestConfig(url, data, config)
       this.beforeRequest(config)
       
       return new Promise((resolve, reject) =>
-        this.http(config)
+        this.getHttp()(config)
           .then((response: AxiosResponse<any>) => this.success(response, resolve, reject, success))
           .catch((reason: AxiosError<any>) => this.error(reason, resolve, reject, error))
           .finally(() => this.complete(resolve, reject, complete)),
@@ -297,7 +311,7 @@ export class Service extends ServiceConfig
    * Parse Zemit Data Response and reject the request if we don't have valid response
    * - @todo Zemit should return a 401 itself
    */
-  responseInterceptor = (response: AxiosResponse<DataInterface<GetViewInterface>>) => {
+  static responseInterceptor = (response: AxiosResponse<DataInterface<GetViewInterface>>) => {
     switch (response?.data?.response) {
       case undefined:
       case null:
@@ -320,18 +334,18 @@ export class Service extends ServiceConfig
    * If 401, the JWT may be expired or invalid, so we try to refresh JWT once
    */
   retry = false
-  rejectedResponseInterceptor = async (reject: AxiosError) => {
-    if (this.refreshOnUnauthorized && reject.response) {
-      if (reject.response.status === 401 && !this.retry) {
-        this.retry = true
-        // await Identity.refreshPromise();
-        if (Identity.isLoggedIn()) {
-          if (reject.config) {
-            return this.http(reject.config)
-          }
-        }
-      }
-    }
+  static rejectedResponseInterceptor = async (reject: AxiosError) => {
+    // if (this.refreshOnUnauthorized && reject.response) {
+    //   if (reject.response.status === 401 && !this.retry) {
+    //     this.retry = true
+    //     // await Identity.refreshPromise();
+    //     if (Identity.isLoggedIn()) {
+    //       if (reject.config) {
+    //         return Service.getAxios()(reject.config)
+    //       }
+    //     }
+    //   }
+    // }
     return Promise.reject(reject)
   }
   
@@ -339,17 +353,17 @@ export class Service extends ServiceConfig
    * Adding X-Authorization JWT header
    * Refresh the JWT token if expired
    */
-  requestInterceptor = async (config: InternalAxiosRequestConfig) => {
+  static requestInterceptor = async (config: InternalAxiosRequestConfig) => {
     if (config.headers) {
       let jwt = Identity.getIdentity()?.jwt
       if (jwt) {
         if (this.refreshOnUnauthorized) {
-          // const token = jose.decodeJwt(jwt);
-          // const exp = token.exp || false;
-          // if (token && exp && exp <= moment().unix()) {
-          //   await Identity.refreshPromise();
-          //   jwt = Identity.getIdentity()?.jwt;
-          // }
+          const token = jose.decodeJwt(jwt);
+          const exp = token.exp || false;
+          if (token && exp && exp <= moment().unix()) {
+            await Identity.refreshPromise();
+            jwt = Identity.getIdentity()?.jwt;
+          }
         }
         config.headers['X-Authorization'] = `Bearer ${jwt}`
       }

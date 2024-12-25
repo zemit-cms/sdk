@@ -21,7 +21,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.6.7",
+    "axios": "^1.7.4",
     "camelcase": "^8.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -30,7 +30,8 @@
     "reflect-metadata": "^0.2.1",
     "store2": "^2.14.2",
     "uuid": "^9.0.1",
-    "vue": "^3.4.15"
+    "vue": "^3.4.15",
+    "vue-tsc": "^2.1.10"
   },
   "devDependencies": {
     "@babel/types": "^7.23.9",
@@ -38,7 +39,6 @@
     "@types/uuid": "^9.0.8",
     "@vitejs/plugin-vue": "^5.0.3",
     "typescript": "^5.2.2",
-    "vite": "^5.1.0",
-    "vue-tsc": "^1.8.27"
+    "vite": "^5.4.6"
   }
 }
