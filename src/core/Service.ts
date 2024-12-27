@@ -10,6 +10,8 @@ import axios, {
 import {Identity} from './Identity'
 import {Model} from './Model'
 import {instanceToPlain, plainToInstance} from 'class-transformer'
+import * as jose from 'jose'
+import moment from 'moment'
 
 import {DataInterface} from '../interfaces'
 import {GetViewInterface} from '../interfaces'
@@ -23,8 +25,23 @@ export abstract class ServiceConfig
   requestConfig?: AxiosRequestConfig
 }
 
+// class ServiceConfigManager {
+//   private static configs: Map<string, Partial<Service>> = new Map();
+//
+//   // Store configuration for a service
+//   static setConfigForService(serviceName: string, config: Partial<Service>) {
+//     ServiceConfigManager.configs.set(serviceName, config);
+//   }
+//
+//   // Get configuration for a specific service
+//   static getConfigForService(serviceName: string): Partial<Service> | undefined {
+//     return ServiceConfigManager.configs.get(serviceName);
+//   }
+// }
+
 export class Service extends ServiceConfig
 {
+  static authService: Service
   static axios: AxiosInstance
   http!: AxiosInstance
   
@@ -50,12 +67,14 @@ export class Service extends ServiceConfig
     logout: '/logout',
     login: '/login',
     upload: '/upload',
+    refresh: '/refresh',
   }
   
   constructor(opts: Partial<ServiceConfig> = {})
   {
     super()
     Object.assign(this, opts)
+    // ServiceConfigManager.setConfigForService(this.constructor.name, this); // Dynamically register this service's config
   }
   
   static getInstance<T, K extends keyof ServiceConfig>(this: new () => T, opts: Partial<ServiceConfig> = {}): T
@@ -139,6 +158,7 @@ export class Service extends ServiceConfig
   getLogoutUrl = () => this.getUrl('logout')
   getLoginUrl = () => this.getUrl('login')
   getUploadUrl = () => this.getUrl('upload')
+  getRefreshUrl = () => this.getUrl('refresh')
   
   // getAll = (data = {}, config = {}) => this.handleRequest(this.getGetAllUrl(), data, config)
   // getAllWith = (data = {}, config = {}) => this.handleRequest(this.getGetAllWithUrl(), data, config)
@@ -159,6 +179,7 @@ export class Service extends ServiceConfig
   delete = (data = {}, config = {}) => this.handleRequest(this.getDeleteUrl(), data, config)
   restore = (data = {}, config = {}) => this.handleRequest(this.getRestoreUrl(), data, config)
   upload = (data = {}, config = {}) => this.handleRequest(this.getUploadUrl(), data, config)
+  refresh = (data = {}, config = {}) => this.handleRequest(this.getRefreshUrl(), data, config)
   
   async handleRequest<D = any, R = any>(
     url: string,
@@ -169,17 +190,18 @@ export class Service extends ServiceConfig
     complete?: CallableFunction,
   ): Promise<AxiosResponse<DataInterface<R>>>
   {
-    return this.prepareUploads(data).then((data) => {
+    // return this.prepareUploads(data).then((data) => {
       this.prepareRequestConfig(url, data, config)
       this.beforeRequest(config)
       
+      config.serviceInstance = this;
       return new Promise((resolve, reject) =>
         this.getHttp()(config)
           .then((response: AxiosResponse<any>) => this.success(response, resolve, reject, success))
           .catch((reason: AxiosError<any>) => this.error(reason, resolve, reject, error))
           .finally(() => this.complete(resolve, reject, complete)),
       )
-    })
+    // })
   }
   
   /**
@@ -214,38 +236,38 @@ export class Service extends ServiceConfig
     })
   }
   
-  prepareUploads<D = any>(model: D | any): Promise<any>
-  {
-    return new Promise((resolve, _reject) => {
-      if (!(model instanceof Model)) {
-        resolve(model)
-      }
-      
-      const data = instanceToPlain(model)
-      const uploadMap: any = model.uploadMap()
-      const promises: Array<Promise<any>> = []
-      Object.keys(data).forEach((key) => {
-        if (uploadMap[key]) {
-          if (data[key] instanceof File) {
-            promises.push(
-              this.uploadFile(data[key], uploadMap[key].category).then((response) => {
-                data[uploadMap[key].key] = response.data.view[0].file.id
-                return response
-              }),
-            )
-          }
-          else if (data[key] === null) {
-            data[uploadMap[key].key] = null
-          }
-          delete data[key]
-        }
-      })
-      
-      Promise.all(promises).then(() => {
-        resolve(data)
-      })
-    })
-  }
+  // prepareUploads<D = any>(model: D | any): Promise<any>
+  // {
+  //   return new Promise((resolve, _reject) => {
+  //     if (!(model instanceof Model)) {
+  //       resolve(model)
+  //     }
+  //
+  //     const data = instanceToPlain(model)
+  //     const uploadMap: any = model.uploadMap()
+  //     const promises: Array<Promise<any>> = []
+  //     Object.keys(data).forEach((key) => {
+  //       if (uploadMap[key]) {
+  //         if (data[key] instanceof File) {
+  //           promises.push(
+  //             this.uploadFile(data[key], uploadMap[key].category).then((response) => {
+  //               data[uploadMap[key].key] = response.data.view[0].file.id
+  //               return response
+  //             }),
+  //           )
+  //         }
+  //         else if (data[key] === null) {
+  //           data[uploadMap[key].key] = null
+  //         }
+  //         delete data[key]
+  //       }
+  //     })
+  //
+  //     Promise.all(promises).then(() => {
+  //       resolve(data)
+  //     })
+  //   })
+  // }
   
   /**
    * Process parameters before Axios Request
@@ -335,17 +357,20 @@ export class Service extends ServiceConfig
    */
   retry = false
   static rejectedResponseInterceptor = async (reject: AxiosError) => {
-    // if (this.refreshOnUnauthorized && reject.response) {
-    //   if (reject.response.status === 401 && !this.retry) {
-    //     this.retry = true
-    //     // await Identity.refreshPromise();
-    //     if (Identity.isLoggedIn()) {
-    //       if (reject.config) {
-    //         return Service.getAxios()(reject.config)
-    //       }
-    //     }
-    //   }
-    // }
+    const serviceInstance = reject.config?.serviceInstance
+    if (serviceInstance?.refreshOnUnauthorized && reject.response) {
+      if (reject.response.status === 401 && !serviceInstance.retry) {
+        serviceInstance.retry = true
+        await Service.refreshPromise()
+        if (Identity.isLoggedIn()) {
+          if (reject.config) {
+            const retry = Service.getAxios()(reject.config);
+            serviceInstance.retry = false
+            return retry;
+          }
+        }
+      }
+    }
     return Promise.reject(reject)
   }
   
@@ -357,11 +382,12 @@ export class Service extends ServiceConfig
     if (config.headers) {
       let jwt = Identity.getIdentity()?.jwt
       if (jwt) {
-        if (this.refreshOnUnauthorized) {
+        if (config.serviceInstance instanceof Service && config.serviceInstance.refreshOnUnauthorized) {
           const token = jose.decodeJwt(jwt);
           const exp = token.exp || false;
-          if (token && exp && exp <= moment().unix()) {
-            await Identity.refreshPromise();
+          const isExpired = token && exp && exp <= moment().unix();
+          if (isExpired) {
+            await Service.refreshPromise()
             jwt = Identity.getIdentity()?.jwt;
           }
         }
@@ -369,5 +395,21 @@ export class Service extends ServiceConfig
       }
     }
     return config
+  }
+  
+  static refreshPromise = async () => {
+    if (!Identity.refreshResponse) {
+      const refreshToken = Identity.getIdentity()?.refreshToken;
+      Identity.refreshResponse = new Promise((resolve, reject) =>
+        Service.authService.refresh({refreshToken})
+          .then(response => {
+            Identity.setIdentity(response.data.view)
+            resolve(response)
+          })
+          .catch(reason => reject(reason))
+          .finally(() => Identity.refreshResponse = null)
+      );
+    }
+    return Identity.refreshResponse
   }
 }
