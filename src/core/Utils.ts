@@ -1,5 +1,5 @@
 import camelCase from 'camelcase';
-import {v4 as uuidv4, V4Options} from 'uuid';
+import {v4 as uuidv4, Version4Options} from 'uuid';
 
 export class Utils {
     /**
@@ -9,8 +9,8 @@ export class Utils {
      * The `uuidv4` function generates random UUIDs. With an optional configuration object,
      * you can influence the random UUID, e.g., by supplying your own random values.
      *
-     * @param {Partial<V4Options>} options - An optional configuration object for the `uuidv4` function.
-     *                                      It's a partial type of V4Options, which means that all properties
+     * @param {Partial<Version4Options>} options - An optional configuration object for the `uuidv4` function.
+     *                                      It's a partial type of Version4Options, which means that all properties
      *                                      are optional.
      *
      * @returns {string} A v4 UUID string.
@@ -23,7 +23,7 @@ export class Utils {
      *
      * @see {@link https://github.com/uuidjs/uuid#version-4-random}
      */
-    static uuid(options: Partial<V4Options> = {}): string {
+    static uuid(options: Partial<Version4Options> = {}): string {
         return uuidv4(options);
     }
 
