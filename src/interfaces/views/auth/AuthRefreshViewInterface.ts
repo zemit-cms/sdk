@@ -1,5 +1,5 @@
-import {GetViewInterface} from "../GetViewInterface";
+import {AuthGetViewInterface} from './AuthGetViewInterface.ts'
 
-export interface AuthRefreshViewInterface extends GetViewInterface {
+export interface AuthRefreshViewInterface extends AuthGetViewInterface {
 
 }
